@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <title>JavaScript</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .star {
+            font-size: 2.5em;
+            color: #ddd;
+            display: inline-block;
+        }
+        
+        .yellow {
+            color: yellow;
+        }
+        
+        .orange {
+            color: orange;
+        }
+        
+        .output {
+            margin: 50px 0;
+            padding: 10px;
+            border: 1px solid #eee;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="stars">
+        <li class="star"><i class="fa fa-star fa-fw"></i></li>
+        <li class="star"><i class="fa fa-star fa-fw"></i></li>
+        <li class="star"><i class="fa fa-star fa-fw"></i></li>
+        <li class="star"><i class="fa fa-star fa-fw"></i></li>
+        <li class="star"><i class="fa fa-star fa-fw"></i></li>
+    </ul>
+    <div class="output">Message </div>
+    <script>
+        const stars = document.querySelectorAll(".star");
+        const output = document.querySelector(".output");
+        for (let x = 0; x < stars.length; x++) {
+            stars[x].starValue = (x + 1);
+            ["mouseover", "mouseout", "click"].forEach(function (e) {
+                stars[x].addEventListener(e, starRate);
+            })
+        }
+
+        function starRate(e) {
+            let t = e.type;
+            let starValue = this.starValue;
+            if (t === "click") {
+                if (starValue > 1) {
+                    output.innerHTML = "You rated this " + starValue + " stars";
+                }
+            }
+            stars.forEach(function (ele, ind) {
+                if (t === "click") {
+                    if (ind < starValue) {
+                        ele.classList.add("orange");
+                    }
+                    else {
+                        ele.classList.remove("orange");
+                    }
+                }
+                if (t === "mouseover") {
+                    if (ind < starValue) {
+                        ele.classList.add("yellow");
+                    }
+                    else {
+                        ele.classList.remove("yellow");
+                    }
+                }
+                if (t === "mouseout") {
+                    ele.classList.remove("yellow");
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
